@@ -1,4 +1,4 @@
-import Database from "../database.js";
+import Database from "../../database.js";
 
 const queryWithConstraints = (base, constraints) =>
   base + " WHERE " + constraints.join(" AND ");

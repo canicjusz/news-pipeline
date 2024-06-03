@@ -48,3 +48,12 @@ showArticles({
   city: "New York",
   state: "NY",
 });
+showArticles({
+  city: "Ashburn",
+  state: "VA",
+});
+
+showArticles({
+  city: "Cincinnati",
+  state: "AR",
+});
