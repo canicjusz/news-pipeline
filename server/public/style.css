@@ -1,11 +1,10 @@
 body {
-  background: #ECECEC;
+  background: #ececec;
 }
 
 main {
   margin: 0 auto;
-  width: -moz-max-content;
-  width: max-content;
+  width: fit-content;
   justify-content: center;
 }
 
@@ -31,4 +30,4 @@ main {
   margin: 20px 0 10px 0;
   font-size: 2rem;
   color: #222831;
-}/*# sourceMappingURL=style.css.map */
+} /*# sourceMappingURL=style.css.map */
