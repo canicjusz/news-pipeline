@@ -1,10 +1,16 @@
 import { escapeLiteral } from "./helpers.js";
 
+const sortByDate = (a, b) => {
+  if (a.isoDate === b.isoDate) {
+    return 0;
+  }
+  return a.isoDate < b.isoDate ? 1 : -1;
+};
+
 class ArticlesGenerator {
   constructor(pool, parser) {
     this.pool = pool;
     this.rssParser = parser;
-    // console.log(this.rssParser);
   }
   async process(row) {
     try {
@@ -16,13 +22,16 @@ class ArticlesGenerator {
       if (articles.length === 0) {
         return;
       }
-      const uniqueArticles = this.#getUnique(articles);
-      const firstArticles = uniqueArticles.slice(0, 4);
+      const sortedArticles = articles.sort(sortByDate);
+      const uniqueArticles = this.#getUnique(sortedArticles);
+      const firstArticles = uniqueArticles.slice(0, 10);
       const uninsertedArticles = await this.#getUninserted(firstArticles);
       if (uninsertedArticles.length === 0) {
         return;
       }
-      const articlesIDs = await this.#addToDatabase(uninsertedArticles);
+      const articlesIDs = await this.#addToDatabase(
+        uninsertedArticles.slice(0, 4)
+      );
       await this.#makeMTMRelation(row.id, articlesIDs);
       console.log(
         `Articles ${articlesIDs.join(", ")} have been added to city of id ${
