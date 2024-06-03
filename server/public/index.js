@@ -29,7 +29,7 @@ function stringToHTML(str) {
 
 function renderData(articles, location) {
   const articlesListElements = articles.map((article) => {
-    return `<li class="article"><a class="article__link" href="${article.link}">${article.title}</a></li>`;
+    return `<li class="article"><a target="_blank" class="article__link" href="${article.link}">${article.title}</a></li>`;
   });
   const element = stringToHTML(`
   <div class="location">
