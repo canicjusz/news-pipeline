@@ -11,7 +11,6 @@ const rssParser = new Parser();
 pool.connect(async (err, client, done) => {
   if (err) throw err;
   const locationsStream = LocationsDownloader.download(client, done);
-  console.log("location stream");
   const articlesGenerator = new ArticlesGenerator(pool, rssParser);
   const processArticlesConcurrently = new ProcessConcurrently(
     articlesGenerator.process,
@@ -19,7 +18,6 @@ pool.connect(async (err, client, done) => {
     articlesGenerator
   );
   for await (const row of locationsStream) {
-    console.log("elo");
     await processArticlesConcurrently.push([row]);
   }
   console.log("Articles updated!");
