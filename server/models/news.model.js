@@ -1,7 +1,7 @@
 import Database from "../../database.js";
 
-const queryWithConstraints = (base, constraints) =>
-  base + " WHERE " + constraints.join(" AND ");
+const constraintsPart = (constraints) =>
+  constraints.length > 0 ? " WHERE " + constraints.join(" AND ") : "";
 
 const addConstraints = (constraints, parameters) => (field, value) => {
   if (value) {
@@ -25,9 +25,7 @@ class Model {
     addConstraintIfSet("c.county", county);
     addConstraintIfSet("c.city", city);
     const query =
-      constraints.length > 0
-        ? queryWithConstraints(queryBase, constraints)
-        : queryBase;
+      queryBase + constraintsPart(constraints) + " ORDER BY a.id DESC LIMIT 10";
     try {
       const dbInstance = Database.getInstance();
       const result = await dbInstance.query(query, constraintParameters);
