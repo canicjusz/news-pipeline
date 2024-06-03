@@ -5,7 +5,7 @@
 -- DROP TABLE public.articles;
 
 CREATE TABLE public.articles (
-	title varchar(255) NULL,
+	title varchar(320) NULL,
 	link varchar NULL,
 	id serial4 NOT NULL,
 	CONSTRAINT articles_pk PRIMARY KEY (id)
