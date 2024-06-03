@@ -6,7 +6,7 @@ const constraintsPart = (constraints) =>
 const addConstraints = (constraints, parameters) => (field, value) => {
   if (value) {
     const parameterNumber = parameters.length + 1;
-    constraints.push(`LOWER(${field}) like $${parameterNumber}`);
+    constraints.push(`${field} like $${parameterNumber}`);
     parameters.push(value.toLowerCase());
   }
 };

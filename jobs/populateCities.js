@@ -12,7 +12,11 @@ class WriteToDB extends Writable {
     this.rows.push(
       pool.query(
         "INSERT INTO cities (city, state, county) VALUES ($1, $2, $3) ON CONFLICT DO NOTHING",
-        [row.city, row.state, row.county]
+        [
+          row.city.toLowerCase(),
+          row.state.toLowerCase(),
+          row.county.toLowerCase(),
+        ]
       )
     );
   }
