@@ -13,10 +13,8 @@
   "dependencies": {
     "csv": "^6.3.9",
     "dotenv": "^16.4.5",
-    "etl": "^0.8.0",
     "express": "^4.19.2",
     "nodemon": "^3.1.2",
-    "p-map": "^7.0.2",
     "pg": "^8.11.5",
     "pg-query-stream": "^4.5.5",
     "rss-parser": "^3.13.0"
