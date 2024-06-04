@@ -4,6 +4,10 @@ import fs from "fs";
 import { parse, transform } from "csv";
 import { pipeline } from "stream/promises";
 import "dotenv/config";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 class WriteToDB extends Writable {
   rows = [];
@@ -33,7 +37,7 @@ const pool = Database.getInstance();
 
 async function populateCities() {
   await pipeline(
-    fs.createReadStream("../data/uscities.csv"),
+    fs.createReadStream(path.join(__dirname, "../data/uscities.csv")),
     parse({ columns: true }),
     transform((record) => {
       return {
